@@ -1,4 +1,4 @@
-import art
+from prettytable import PrettyTable
 
 MENU = {
     "espresso": {
@@ -55,16 +55,22 @@ def update_resources(beverage):
         resources[ingredient] -= beverage['ingredients'][ingredient]
 
 
+def print_menu():
+    menu = PrettyTable()
+    menu.add_column('ITEM', ['Espresso', 'Latte', 'Cappuccino'])
+    menu.add_column('PRICE', ['$1.5', '$2.5', '$3.0'])
+    print(menu)
+
+
 profit = 0
 is_on = True
 
-print(art.logo)
-
 while is_on:
-    print("\nWhat would you like today ?")
-    choice = input("Espresso / Latte / Cappuccino\t: ").lower()
+    print_menu()
+    choice = input("\n\nWhat would you like today? : ").lower()
     if choice == 'off':
         is_on = False
+        print("\nShutting Down")
 
     elif choice == 'report':
         print(f"\n\tWater : {resources['water']}")
@@ -75,7 +81,6 @@ while is_on:
     else:
         drink = MENU[choice]
         if check_resources(drink):
-            print(f"Your drink costs ${drink['cost']:.2f}")
             print("Insert coins : ")
             amount = coins()
             if amount >= drink['cost']:
@@ -85,6 +90,6 @@ while is_on:
                 print("Brewing...")
                 update_resources(drink)
                 profit += drink['cost']
-                print(f"Here's your {choice.title()}. Enjoy :)")
+                print(f"Here's your {choice.title()}. Enjoy :)\n\n")
             else:
-                print("Sorry, That's not enough money.\nMoney refunded")
+                print("Sorry, That's not enough money.\nMoney refunded\n\n")
