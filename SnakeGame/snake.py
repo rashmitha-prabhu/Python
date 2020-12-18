@@ -14,13 +14,14 @@ class Snake:
         self.segments = []
         self.create_snake()
         self.head = self.segments[0]
+        self.head.color("purple")
 
     def create_snake(self):
         for position in POSITIONS:
             self.add_segment(position)
 
     def add_segment(self, position):
-        new_seg = Turtle("square")
+        new_seg = Turtle("circle")
         new_seg.color("white")
         new_seg.penup()
         new_seg.goto(position)
@@ -51,3 +52,11 @@ class Snake:
     def left(self):
         if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
+
+    # def collide(self):
+    #     if self.head.xcor() > 270 or self.head.xcor() < -270:
+    #         x = -(self.head.xcor())
+    #         self.head.goto(x, self.head.ycor())
+    #     if self.head.ycor() > 270 or self.head.ycor() < -270:
+    #         y = -self.head.ycor()
+    #         self.head.goto(self.head.xcor(), y)

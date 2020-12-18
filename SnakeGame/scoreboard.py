@@ -21,5 +21,9 @@ class ScoreBoard(Turtle):
         self.update_board()
 
     def game_over(self):
-        self.goto(0, 0)
+        self.goto(0, 20)
         self.write("GAME OVER", False, "center", ("Courier", 15, "normal"))
+
+    def retry(self):
+        self.goto(0, -20)
+        self.write("Press SPACE to RESTART", False, "center", ("Courier", 15, "normal"))
