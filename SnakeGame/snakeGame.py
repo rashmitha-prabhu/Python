@@ -1,25 +1,15 @@
-from turtle import Turtle, Screen
+from turtle import Screen
 import time
 from snake import Snake
 from food import Food
 from scoreboard import ScoreBoard
-
-# border = Turtle()
-# border.color("white")
-# border.hideturtle()
-# border.penup()
-# border.goto(-300, -300)
-# border.pendown()
-# for i in range(4):
-#     border.forward(600)
-#     border.left(90)
 
 
 def restart():
     screen = Screen()
     screen.clear()
     screen.setup(600, 600)
-    screen.tracer(0)
+    # screen.tracer(0)
     screen.bgcolor("black")
     screen.title("Snake Game")
 
@@ -40,17 +30,17 @@ def restart():
         time.sleep(0.1)
         snake.move()
 
-        if snake.head.distance(food) < 15:
+        if snake.head.distance(food) < 20:
             food.refresh()
             snake.extend()
             scoreboard.update_score()
 
-        if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-            scoreboard.game_over()
+        if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
             # snake.collide()
+            scoreboard.game_over()
+            is_on = False
             scoreboard.retry()
             screen.listen()
-            is_on = False
             screen.onkey(restart, "space")
 
         for segment in snake.segments[1:]:
@@ -62,5 +52,6 @@ def restart():
                 screen.onkey(restart, "space")
 
     screen.exitonclick()
+
 
 restart()
