@@ -3,26 +3,30 @@ from game_data import data
 import random
 import subprocess as sp
 
-score =0
+score = 0
 chosen = []
 
+
 def choose():
-    n = random.randint(0,len(data)-1)
+    n = random.randint(0, len(data)-1)
     if n not in chosen:
         chosen.append(n)
         return n
     while n in chosen:
-        n = random.randint(0,len(data)-1)
+        n = random.randint(0, len(data)-1)
     chosen.append(n)
     return n
 
-def describe(n):
-    return (f"{data[n]['name']}, a {data[n]['description']} from {data[n]['country']}")
 
-def compare(ch1,ch2):
-    if data[ch1]['follower_count'] > data[ch2]['follower_count']:
+def describe(n):
+    return f"{data[n]['name']}, a {data[n]['description']} from {data[n]['country']}"
+
+
+def compare(cha, chb):
+    if data[cha]['follower_count'] > data[chb]['follower_count']:
         return "a"
     return "b"
+
 
 ch1 = choose()
 print(ch1)
@@ -41,14 +45,14 @@ while game:
 
     choice = input("Who has more Instagram followers (A/B) : ")
 
-    if choice.lower() == compare(ch1,ch2):
-        score+=1
-        ch1=ch2
-        ch2=choose()
+    if choice.lower() == compare(ch1, ch2):
+        score += 1
+        ch1 = ch2
+        ch2 = choose()
     
     else:
         tmp = sp.call('clear', shell=True)
         print(art.logo)
-        print("\nSorry, Thats wrong")
+        print("\nSorry, That's wrong")
         print(f"\nFinal Score : {score}")
         game = False
