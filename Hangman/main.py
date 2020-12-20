@@ -4,9 +4,11 @@ import hangman_art
 import hangman_words
 import subprocess as sp
 
+
 def clear():
     tmp = sp.call('clear', shell=True)
     print(hangman_art.logo+"\n\n")
+
 
 word_list = hangman_words.word_list
 
@@ -20,21 +22,21 @@ while True:
     lives = 6
 
     display = []
-    entered=[]
+    entered = []
 
     for _ in range(word_length):
         display += "_"
 
-    n=word_length
+    n = word_length
 
     while n > word_length-2:
-        i = random.randint(0,word_length-1)
+        i = random.randint(0, word_length-1)
         if chosen_word[i] not in display:
             letter = chosen_word[i]
             for i in range(word_length):
-                if chosen_word[i]==letter:
-                    display[i]=letter
-                    n-=1
+                if chosen_word[i] == letter:
+                    display[i] = letter
+                    n -= 1
 
     while not end_of_game:
         print(f"{' '.join(display)}") 
@@ -48,7 +50,7 @@ while True:
             continue
 
         else:
-            entered+=guess
+            entered += guess
 
         for position in range(word_length):
             letter = chosen_word[position]
