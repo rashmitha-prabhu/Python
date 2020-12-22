@@ -14,7 +14,6 @@ class Snake:
         self.segments = []
         self.create_snake()
         self.head = self.segments[0]
-        self.head.color("wheat")
 
     def create_snake(self):
         for position in POSITIONS:
@@ -53,10 +52,9 @@ class Snake:
         if self.head.heading() != RIGHT:
             self.head.setheading(LEFT)
 
-    def collide(self):
-        if self.head.xcor() > 290 or self.head.xcor() < -290:
-            x = -(self.head.xcor())
-            self.head.goto(x, self.head.ycor())
-        if self.head.ycor() > 290 or self.head.ycor() < -290:
-            y = -self.head.ycor()
-            self.head.goto(self.head.xcor(), y)
+    def snake_reset(self):
+        for seg in self.segments:
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]

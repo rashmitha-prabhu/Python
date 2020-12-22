@@ -5,18 +5,25 @@ from food import Food
 from scoreboard import ScoreBoard
 
 
-def restart():
-    screen = Screen()
+def set_screen():
     screen.clear()
     screen.setup(600, 600)
-    # screen.tracer(0)
+    screen.tracer(0)
     screen.bgcolor("black")
     screen.title("Snake Game")
 
-    is_on = True
+
+screen = Screen()
+scoreboard = ScoreBoard()
+
+
+def restart():
+    set_screen()
     snake = Snake()
     food = Food()
-    scoreboard = ScoreBoard()
+    scoreboard.update_board()
+    scoreboard.new_high_score()
+    is_on = True
 
     screen.listen()
     screen.onkey(snake.up, "Up")
@@ -36,20 +43,19 @@ def restart():
             scoreboard.update_score()
 
         if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-            # snake.collide()
-            scoreboard.game_over()
             is_on = False
             scoreboard.retry()
             screen.listen()
             screen.onkey(restart, "space")
+            snake.snake_reset()
 
         for segment in snake.segments[1:]:
             if snake.head.distance(segment) < 10:
-                scoreboard.game_over()
+                is_on = False
                 scoreboard.retry()
                 screen.listen()
-                is_on = False
                 screen.onkey(restart, "space")
+                snake.snake_reset()
 
     screen.exitonclick()
 
