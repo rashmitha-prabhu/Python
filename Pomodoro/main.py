@@ -43,7 +43,6 @@ def play_timer():
     global time
     time_comp = time.split(':')
     count = int(time_comp[0]) * 60 + int(time_comp[1])
-    print(count)
     countdown(int(count))
     start.config(text="Stop")
     if start['text'] == 'Stop':
@@ -110,12 +109,12 @@ title = Label(text='Timer')
 title.config(fg=GREEN, bg=YELLOW, font=(FONT_NAME, 30, 'bold'))
 title.grid(column=1, row=0)
 
-start = Button(text='Start', command=start_timer)
-start.config(highlightthickness=0)
+start = Button(text='Start', command=start_timer, font=(FONT_NAME, 15, 'normal'))
+start.config(highlightthickness=0, bg=GREEN, padx=20, pady=5, border=2)
 start.grid(column=0, row=4)
 
-reset = Button(text='Reset', command=reset_timer)
-reset.config(highlightthickness=0)
+reset = Button(text='Reset', command=reset_timer, font=(FONT_NAME, 15, 'normal'))
+reset.config(highlightthickness=0, bg=RED, padx=20, pady=5, border=2)
 reset.grid(column=2, row=4)
 
 checkmark = Label()
